@@ -10,17 +10,24 @@ const BASE_URL = "https://gitlab.com/api/v4";
 
 export const getUserRepos = async(username)=>{
     try {
-        const userResponse = await axios.get(`${BASE_URL}/users?username=${username}`);
-        const user = userResponse.data[0];
+        // const userResponse = await axios.get(`${BASE_URL}/projects`);
+            // Find user
 
-        if(!user){
-            throw new Error("User not found");
-        }
+    const userResponse = await axios.get(`${BASE_URL}/users/${username}/projects`);
 
-        const repo = await axios.get(`${BASE_URL}/users/${user.id}/projects`);
 
-        return repo.data;
-        
+    // Get repos of user
+    // const repoResponse = await axios.get( `${BASE_URL}/users/${user.id}/projects`);
+
+    return userResponse.data;
+
+        // const repositories = userResponse.data.slice(0, 5);
+        // return userResponse.data; //first 5 repos only
+
+        // if(!user){
+        //     throw new Error("User not found");
+        // }
+
     } catch (error) {
         console.log(error);
     }

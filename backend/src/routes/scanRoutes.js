@@ -1,12 +1,8 @@
 import express from 'express'
 const router = express.Router();
+import { scanRepository } from '../controllers/scanController.js';
 
-router.post('/scan', (req, res)=>{
-    const {username} = req.body;
+router.post('/scan', scanRepository);
 
-    res.status(200).json({
-        username
-    })
-})
 
 export default router;
